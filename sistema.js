@@ -14,7 +14,8 @@ function imprimir(){
     console.log("Impuestos totales: ", precio * 0.75, "ARS");
     console.log("Precio final del juego: ", precio_final, "ARS");
     console.log("Volver a calcular otro juego");
-    alert("El precio ha sido calculado correctamente, chequear la consola")
+    let texto_output = juego + " sale " + precio_final + " ARS en total." + " Los impuestos son de " + precio * 0.75 + " ARS.";
+    alert(texto_output);
 }
 
 
