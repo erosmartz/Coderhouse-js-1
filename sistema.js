@@ -113,11 +113,6 @@ for (let producto of lista_productos){
 
 /* filters */
 
-/* filtro de ordenado por precio */
-
-function filter_order ( a , b){
-    return a - b
-}
 
 
 /* filtro de juegos gratis */
@@ -153,7 +148,8 @@ let filter_lista_hotsale = lista_productos.map (filter_hotsale);
 
 
 /* se imprime el array en la consola */
-console.log(lista_productos.sort(filter_order));
+console.log ("A continuacion se muestran la lista de juegos:");
+console.log(lista_productos);
 
 
 /* se imprime la lista de juegos gratis */
