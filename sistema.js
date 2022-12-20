@@ -128,13 +128,23 @@ function filter_free(juego){
 
 /* filtro para fecha de ofertas */
 function filter_hotsale(juego){
-    let descuento = juego.precio * 0.25;
+    descuento = juego.precio * 0.25;
 
-    return {
-        nombre:juego.nombre,
-        precio:juego.precio - descuento,
-        plataforma:juego.plataforma
+    if (isNaN(juego.precio)) {
+        return {
+            nombre:juego.nombre,
+            precio:"FREE",
+            plataforma:juego.plataforma
+        }
     }
+    else {
+        return {
+            nombre:juego.nombre,
+            precio:juego.precio - descuento,
+            plataforma:juego.plataforma
+        }
+    }
+    
 }
 /* nuevo array mapeado con el filtro de ofertas */
 let filter_lista_hotsale = lista_productos.map (filter_hotsale);
