@@ -51,40 +51,38 @@
 
     <main class="container">
  
-    <section class="section">
+    <section class="section" id="formulario">
         <div class="block">
             <p class="title">
                 Calculadora de Precios de Steam
             </p>
         </div>
 
-        <div id="formulario">
+        <div class="block">
             <div class="field">
                 <label class="label">Nombre del Juego</label>
                 <div class="control">
-                  <input class="input" type="text" placeholder="Ejemplo: Dark Souls 3">
+                  <input class="input" type="text" placeholder="Ejemplo: Dark Souls 3" id="input_nombre">
                 </div>
             </div>
 
             <div class="field">
                 <label class="label">Precio del Juego</label>
                 <div class="control">
-                  <input class="input" type="text" placeholder="Precio en Pesos Argentinos">
+                  <input class="input" type="number" placeholder="Precio en Pesos Argentinos" id="input_precio">
                 </div>
             </div>
 
             <div class="field is-grouped">
                 <div class="control">
-                  <button class="button is-link">Enviar</button>
-                </div>
-                <div class="control">
-                  <button class="button is-link is-light">Cancelar</button>
+                  <button class="button is-link" id="input_send">Calcular</button>
                 </div>
               </div>
 
-
-
         </div>
+
+
+        
 
         
 
