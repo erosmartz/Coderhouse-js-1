@@ -1,6 +1,7 @@
 
 
 let array_juegos = [];
+let contador = 0;
 
 function set_datos(){
 
@@ -31,16 +32,20 @@ function set_datos(){
 }
 
 function pop_up() {
+
+    contador = contador + 1;
     let data_nombre = document.getElementById("input_nombre");
     let data_precio = document.getElementById("input_precio");
 
     let data_precio_masiva = parseFloat(data_precio.value) * 1.75;
 
     let seccion = document.getElementById("formulario");
-    let datos = "<div class='block'><article class='message'><div class='message-header'><p>" + "El juego '" + data_nombre.value + "' de $" + data_precio.value + " con impuestos vale unos: " + "</p></div><div class='message-body'>" + "$" + data_precio_masiva + " Pesos Argentinos." + "</div></article></div>";
+    let datos = "<div id='" + contador + "' class='block box'><p>" + "El juego '" + data_nombre.value + "' de $" + data_precio.value + " con impuestos vale unos: " + "$" + data_precio_masiva + " Pesos Argentinos." + "<div class='control'><button class='button is-link' id='input_addtocart'>Agregar a Lista de Deseados</button></div></div>";
     let info_juego = document.createElement("div");
+    
     info_juego.innerHTML = datos;
     seccion.append(info_juego);
+
 }
 
 
