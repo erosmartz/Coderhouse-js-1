@@ -33,9 +33,6 @@ function set_datos(){
 
 function pop_up() {
 
-    contador = contador + 1;
-    let data_nombre = document.getElementById("input_nombre");
-    let data_precio = document.getElementById("input_precio");
 
     let data_precio_masiva = parseFloat(data_precio.value) * 1.75;
 
