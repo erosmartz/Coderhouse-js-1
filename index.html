@@ -1,12 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pre-Entrega 2</title>
-</head>
-<body>
-    <script src="sistema.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+    <title>Pre-Entrega 3</title>
+  </head>
+  <body>
+    <nav class="navbar container" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="index.html">
+          <img src="img/logo.png" width="112" height="28" />
+        </a>
+
+        <a
+          role="button"
+          class="navbar-burger"
+          aria-label="menu"
+          aria-expanded="false"
+          data-target="navbarMain"
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div id="navbarMain" class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item"> Home </a>
+
+          <a class="navbar-item" href="html/store.html"> Ofertas </a>
+
+          <a class="navbar-item" href="html/news.html"> Noticias </a>
+        </div>
+
+        <div class="navbar-end">
+          <div class="buttons">
+            <a class="button is-primary" id="Deseados">
+              <strong>Deseados</strong>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container">
+ 
+    <section class="section">
+        <div class="block">
+            <p class="title">
+                Calculadora de Precios de Steam
+            </p>
+        </div>
+
+        <div id="formulario">
+            <div class="field">
+                <label class="label">Nombre del Juego</label>
+                <div class="control">
+                  <input class="input" type="text" placeholder="Ejemplo: Dark Souls 3">
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Precio del Juego</label>
+                <div class="control">
+                  <input class="input" type="text" placeholder="Precio en Pesos Argentinos">
+                </div>
+            </div>
+
+            <div class="field is-grouped">
+                <div class="control">
+                  <button class="button is-link">Enviar</button>
+                </div>
+                <div class="control">
+                  <button class="button is-link is-light">Cancelar</button>
+                </div>
+              </div>
+
+
+
+        </div>
+
+        
+
+    </section>
+    </main>
+
+
+
+    <script src="js/script.js"></script>
+  </body>
 </html>
