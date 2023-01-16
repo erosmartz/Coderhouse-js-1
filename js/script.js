@@ -1,20 +1,12 @@
-let array_juegos = [];
-let contador = 0;
+let array_temp = [];
 let juego_global;
 
 function data_push() {
   /* FUNCION PUSH A JSON */
-  array_juegos.push(juego_global);
-  let array_JSON = JSON.stringify(array_juegos);
+  array_temp.push(juego_global);
+  let array_JSON = JSON.stringify(array_temp);
 
-  localStorage.setItem("array_RAW", array_JSON);
-
-  let restore_juego = localStorage.getItem("array_RAW");
-
-
-  restore_juego = JSON.parse(restore_juego);
-
-  console.log(restore_juego);
+  localStorage.setItem("array_local", array_JSON);
 
   /* FUNCION PUSH A JSON */
 }
@@ -34,15 +26,18 @@ function set_datos() {
     let info_juego = document.getElementById("data_node");
     info_juego.innerHTML = `<p>El juego "${juego.Nombre}" 
     de $${juego.Precio}, 
-    con todos los impuestos sale $${juego.Precio * 1.75}.
+    con todos los impuestos sale $${juego.Precio * 1.75}.</p>
     <div class="control"><button class="button is-link" id="input_addcart">Agregar a Deseados</button></div>`;
+    
+    let input_add = document.getElementById("input_addcart");
+    input_add.addEventListener("click",data_push);
 
   } else {
 
     let info_juego = document.createElement("div");
 
     info_juego.innerHTML = `<div id="data_node" class="box"><p>El juego "${juego.Nombre}" 
-    de $${juego.Precio}, con todos los impuestos sale $${juego.Precio * 1.75}.
+    de $${juego.Precio}, con todos los impuestos sale $${juego.Precio * 1.75}.</p>
     <div class="control"><button class="button is-link" id="input_addcart">Agregar a Deseados</button></div></div>`;
 
     seccion.append(info_juego);

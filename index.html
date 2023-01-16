@@ -11,7 +11,11 @@
     <title>Pre-Entrega 3</title>
   </head>
   <body>
-    <nav class="navbar container" role="navigation" aria-label="main navigation">
+    <nav
+      class="navbar container"
+      role="navigation"
+      aria-label="main navigation"
+    >
       <div class="navbar-brand">
         <a class="navbar-item" href="index.html">
           <img src="img/logo.png" width="112" height="28" />
@@ -34,65 +38,58 @@
         <div class="navbar-start">
           <a class="navbar-item"> Home </a>
 
-          <a class="navbar-item" href="html/store.html"> Ofertas </a>
-
           <a class="navbar-item" href="html/news.html"> Noticias </a>
         </div>
 
-        <div class="navbar-end">
+        <div class="navbar-end" id="navbar_end">
           <div class="buttons">
-            <a class="button is-primary" id="Deseados">
-              <strong>Deseados</strong>
-            </a>
+            <a class="button is-primary" id="input_wishlist"> Deseados </a>
           </div>
         </div>
       </div>
     </nav>
 
     <main class="container">
- 
-    <section class="section" id="formulario">
+      <section class="section" id="formulario">
         <div class="block">
-            <p class="title">
-                Calculadora de Precios de Steam
-            </p>
+          <p class="title">Calculadora de Precios de Steam</p>
         </div>
 
         <div class="block">
-            <div class="field">
-                <label class="label">Nombre del Juego</label>
-                <div class="control">
-                  <input class="input" type="text" placeholder="Ejemplo: Dark Souls 3" id="input_nombre">
-                </div>
+          <div class="field">
+            <label class="label">Nombre del Juego</label>
+            <div class="control">
+              <input
+                class="input"
+                type="text"
+                placeholder="Ejemplo: Dark Souls 3"
+                id="input_nombre"
+              />
             </div>
+          </div>
 
-            <div class="field">
-                <label class="label">Precio del Juego</label>
-                <div class="control">
-                  <input class="input" type="number" placeholder="Precio en Pesos Argentinos" id="input_precio">
-                </div>
+          <div class="field">
+            <label class="label">Precio del Juego</label>
+            <div class="control">
+              <input
+                class="input"
+                type="number"
+                placeholder="Precio en Pesos Argentinos"
+                id="input_precio"
+              />
             </div>
+          </div>
 
-            <div class="field is-grouped">
-                <div class="control">
-                  <button class="button is-link" id="input_send">Calcular</button>
-                </div>
-              </div>
-
+          <div class="field is-grouped">
+            <div class="control">
+              <button class="button is-link" id="input_send">Calcular</button>
+            </div>
+          </div>
         </div>
-
-
-        
-
-        
-
-    </section>
+      </section>
     </main>
-
-
 
     <script src="js/script.js"></script>
     <script src="js/deseados.js"></script>
-    
   </body>
 </html>
