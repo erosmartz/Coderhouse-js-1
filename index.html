@@ -42,8 +42,24 @@
         </div>
 
         <div class="navbar-end" id="navbar_end">
-          <div class="buttons">
-            <a class="button is-primary" id="input_wishlist"> Deseados </a>
+          <div class="dropdown is-hoverable navbar-item">
+
+
+            <div class="dropdown-trigger">
+              <button
+                class="button"
+                aria-haspopup="true"
+                aria-controls="dropdown-menu2"
+                id="input_wishlist"
+              >
+                <span id="wishlist_texto">Deseados</span>
+              </button>
+            </div>
+
+
+            <div class="dropdown-menu" id="dropdown-menu2" role="menu">
+              <div class="dropdown-content" id="wishlist_node">
+            </div>
           </div>
         </div>
       </div>
