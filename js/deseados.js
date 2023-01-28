@@ -1,4 +1,5 @@
 let array_empty = false;
+let x = 0;
 
 function data_restore() {
   let array_restore = localStorage.getItem("array_local");
@@ -36,27 +37,36 @@ function show_wishlist() {
   } else {
     let array_restore = localStorage.getItem("array_local");
     array_restore = JSON.parse(array_restore);
-    let node3_check = document.getElementById("node3_check");
+
 
     array_restore.forEach((element) => {
+      console.log(element);
+      
       let wishlist_item = document.createElement("div");
       wishlist_item.innerHTML = `<div class="dropdown-item">
       <p">Juego: ${element.Nombre} - Precio: ${element.Precio}
     </p>
-    <button class="button is-small is-danger is-outlined borrar_node">
+    <button class="button is-small is-danger is-outlined" id="node_${x}">
     <span>Borrar</span>
     </button>
     </div>
     <hr class="dropdown-divider" />`;
-
+      
+      console.log(x);
       wishlist_node.append(wishlist_item);
+
+
+      let node = document.getElementById(`node_${x}`);
+      node.addEventListener("click", borrar_juego);
+      x ++;
+      
     });
   }
 }
 
-function borrar_node () {
-  let nodo = document.getElementsByClassName("borrar_node");
-  
+
+function borrar_juego () {
+  console.log("funciona")
 }
 
 let input_cart = document.getElementById("input_wishlist");
