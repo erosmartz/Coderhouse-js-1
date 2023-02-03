@@ -40,17 +40,16 @@ function show_wishlist() {
 
 
     array_restore.forEach((element) => {
-      console.log(element);
       
       let wishlist_item = document.createElement("div");
       wishlist_item.innerHTML = `<div class="dropdown-item">
       <p">Juego: ${element.Nombre} - Precio: ${element.Precio}
-    </p>
-    <button class="button is-small is-danger is-outlined" id="node_${x}">
-    <span>Borrar</span>
-    </button>
-    </div>
-    <hr class="dropdown-divider" />`;
+      </p>
+      <button class="button is-small is-danger is-outlined" id="node_${x}">
+      <span>Borrar</span>
+      </button>
+      </div>
+      <hr class="dropdown-divider" />`;
       
       console.log(x);
       wishlist_node.append(wishlist_item);
@@ -64,10 +63,6 @@ function show_wishlist() {
   }
 }
 
-
-function borrar_juego () {
-  console.log("funciona")
-}
 
 let input_cart = document.getElementById("input_wishlist");
 input_cart.addEventListener("click", show_wishlist);
