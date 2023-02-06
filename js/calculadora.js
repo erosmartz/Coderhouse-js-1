@@ -19,11 +19,11 @@ Luego se pregunta si se quiere agregar a lista de deseados */
 function set_datos() {
 
   /* VALORES TOMADOS */
-  let data_nombre = document.getElementById("input_nombre");
-  let data_precio = document.getElementById("input_precio");
+  let nombre = document.getElementById("nombre");
+  let precio = document.getElementById("precio");
 
   /* OBJETO JUEGO */
-  let juego = { Nombre: data_nombre.value, Precio: data_precio.value };
+  let juego = { Nombre: nombre.value, Precio: precio.value };
 
   /* node_check se usa para saber si ya existe el node */
   let node_check = document.getElementById("data_node");
@@ -34,8 +34,8 @@ function set_datos() {
 
 
   /* condicional que chequea si ya existe el nodo. 
-  ----Si existe > se edita el innerHTML. 
-  ----De lo contrario, se crea el nuevo nodo por primera vez. */
+  ----Si existe >>           se edita el innerHTML. 
+  ----Si no existe (null) >> se crea el nuevo nodo por primera vez. */
   if (node_check) {
 
     let info_juego = document.getElementById("data_node");

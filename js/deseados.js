@@ -1,71 +1,122 @@
-let array_empty = false;
-let x = 0;
-
-function data_restore() {
-  let array_restore = localStorage.getItem("array_local");
-  if (array_restore != null) {
-    array_check = true;
-    array_restore = JSON.parse(array_restore);
-
-    let array_length = array_restore.length;
-
-    if (array_length > 0) {
-      let wishlist_button = document.getElementById("wishlist_texto");
-      wishlist_button.innerText = `Deseados(${array_length})`;
-    }
-  } else {
-    array_empty = true;
-  }
-}
-
-function show_wishlist() {
-  let wishlist_node = document.getElementById("wishlist_node");
-  let node2_check = document.getElementById("node2_check");
-  wishlist_node.innerHTML = "";
-  if (array_empty) {
-    if (node2_check) {
-      wishlist_item.innerHTML = `<div class="dropdown-item">
-        <p>No has agregado ningún juego a tu lista de deseados!</p>
-      </div>`;
-    } else {
-      let wishlist_item = document.createElement("div");
-      wishlist_item.innerHTML = `<div class="dropdown-item" id=node2_check>
-        <p>No has agregado ningún juego a tu lista de deseados!</p>
-      </div>`;
-      wishlist_node.append(wishlist_item);
-    }
-  } else {
-    let array_restore = localStorage.getItem("array_local");
-    array_restore = JSON.parse(array_restore);
+/* ============================================= */
+/*    FUNCIONES QUE ACTUALIZAN EL LOCAL STORAGE  */
+/* ============================================= */
 
 
-    array_restore.forEach((element) => {
-      
-      let wishlist_item = document.createElement("div");
-      wishlist_item.innerHTML = `<div class="dropdown-item">
-      <p">Juego: ${element.Nombre} - Precio: ${element.Precio}
-      </p>
-      <button class="button is-small is-danger is-outlined" id="node_${x}">
-      <span>Borrar</span>
-      </button>
-      </div>
-      <hr class="dropdown-divider" />`;
-      
-      console.log(x);
-      wishlist_node.append(wishlist_item);
-
-
-      let node = document.getElementById(`node_${x}`);
-      node.addEventListener("click", borrar_juego);
-      x ++;
-      
-    });
+/* se chequea el localStorage para ver si existe la key "array_local". */
+function get_array() {
+  let a = localStorage.getItem("array_local")
+  if (a){
+    a = JSON.parse(a)
+    return a
   }
 }
 
 
-let input_cart = document.getElementById("input_wishlist");
-input_cart.addEventListener("click", show_wishlist);
+/* se llama a esta funcion para setear el array nuevo una vez que se hacen cambios como borrar objetos de ese array */
+function set_array(array) {
+  let a = JSON.stringify(array);
+  localStorage.setItem("array_local", a);
+}
 
-window.addEventListener("load", data_restore);
-window.addEventListener("click", data_restore);
+
+
+
+
+
+
+
+/* ============================================= */
+/*     FUNCIONES PARA LA LISTA DE DESEADOS.      */
+/* ============================================= */
+
+
+
+/* Funcion: actualizar el count de items de la lista de deseados */
+function wishlist_count() {
+ 
+  /* usando el metodo length se cambia el nodo  */
+  if (get_array() != null) {
+    if (get_array().length > 0){
+    document.getElementById("wish_number").innerText = `Deseados(${get_array().length})`;
+    }
+  }
+}
+
+
+
+
+/* Funcion: Actualizar el nodo principal de la lista de deseados.
+   Utiliza las funciones wishlist_count get_array y wishlist_loop */
+function wishlist_update() {
+
+  /* variable que almacena el nodo principal donde van a estar los sub-nodos/items deseados */
+  let wishlist = document.getElementById("wishlist");
+
+    /* Si el array no existe --> */
+    if (get_array() == null || get_array().length < 1) {
+        wishlist.innerHTML = `<div class="dropdown-item"><p>
+        No has agregado ningún juego a tu lista de deseados!
+        </p></div>`
+      }
+
+    /* Si el array existe --> */
+    else {
+      /* Guardamos el array parseado en una variable */
+      let lista_juegos = get_array()
+      /* Cambiamos el innerHTML del nodo principal con la string creada a partir de la funcion wishlist_loop */
+      wishlist.innerHTML = wishlist_loop(lista_juegos);
+      };
+}
+
+
+
+/* Funcion: Recorrer el array y concadenar cada item del array en un string.
+   Pide como parametro un array. 
+   Retorna un string para ser utilizado como nodo (hecho por subnodos) */
+function wishlist_loop(array) {
+
+  let nodos = ''; /* se setea la variable principal */
+
+  /* se recorre el array y se guardan todos los nodos en formato de string */
+  for (let i = 0; i < array.length; i++) {
+    nodos += `<div class="dropdown-item">
+    <p">Juego: ${array[i].Nombre} - Precio: ${array[i].Precio}
+    </p>
+    <button class="button is-small is-danger is-outlined" onClick='removerItem(${i})'>
+    <span>Borrar</span>
+    </button>
+    </div>
+    <hr class="dropdown-divider" />`;
+  }
+
+  return nodos;
+}
+
+
+
+/* Funcion: Los botones "borrar" de la lista de deseados. */
+function removerItem(index){ 
+
+  let lista = get_array(); /* Guardamos el array parseado en una variable */
+  
+  lista.splice(index, 1); /* Spliceamos el item deseado, usando como referencia el index guardado como parametro en el nodo */
+  
+  set_array(lista); /* Updateamos el array que esta guardado en el localStorage, con el nuevo array spliceado */
+  
+  wishlist_update(); /* Corremos de vuelta la funcion que refresca los valores del nodo wishlist del DOM */
+}
+
+
+
+
+/* los varios eventListeners que se usan en este script */
+
+
+
+
+    let input_cart = document.getElementById("input_wishlist");
+    input_cart.addEventListener("mouseover", wishlist_update);
+
+    /*para cuando se carga la pagina */
+    window.addEventListener("load", wishlist_update);
