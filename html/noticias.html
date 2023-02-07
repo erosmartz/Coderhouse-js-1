@@ -14,7 +14,7 @@
     <nav class="navbar container" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <a class="navbar-item" href="../index.html">
-          <img src="../img/logo.png" width="112" height="28" />
+          <img src="../img/main/logo.png" width="112" height="28" />
         </a>
 
         <a
@@ -35,36 +35,36 @@
           <a class="navbar-item" href="../index.html"> Home </a>
 
 
-          <a class="navbar-item" href="news.html"> Noticias </a>
+          <a class="navbar-item" href="noticias.html"> Noticias </a>
         </div>
 
         <div class="navbar-end" id="navbar_end">
-          <div class="dropdown is-hoverable navbar-item">
+          <div class="navbar-item dropdown is-hoverable">
 
 
             <div class="dropdown-trigger">
               <button
                 class="button"
                 aria-haspopup="true"
-                aria-controls="dropdown-menu2"
+                aria-controls="dropdown-menu4"
                 id="input_wishlist"
               >
-                <span id="wishlist_texto">Deseados</span>
+                <span id="wish_number">Deseados</span>
               </button>
             </div>
 
 
-            <div class="dropdown-menu" id="dropdown-menu2" role="menu">
-              <div class="dropdown-content" id="wishlist_node">
+            <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+              <div class="dropdown-content" id="wishlist">
+              </div>
             </div>
-          </div>
         </div>
       </div>
       </div>
     </nav>
 
-    <main class="container">
-        <section class="section">
+    <main class="section">
+        <section class="section container">
 
             <div id="noticias">
                 <div class="columns">
@@ -73,7 +73,7 @@
                         <div class="card">
                             <div class="card-image">
                                 <figure class="image is-4by3">
-                                <img src="../img/news1.jpg" alt="Imagen">
+                                <img src="../img/noticias/news1.jpg" alt="Imagen">
                                 </figure>
                             </div>
                             <div class="card-content">
@@ -96,7 +96,7 @@
                         <div class="card">
                             <div class="card-image">
                             <figure class="image is-4by3">
-                                <img src="../img/news2.jpg" alt="Imagen">
+                                <img src="../img/noticias/news2.jpg" alt="Imagen">
                             </figure>
                             </div>
                             <div class="card-content">
@@ -122,7 +122,7 @@
                         <div class="card">
                             <div class="card-image">
                                 <figure class="image is-4by3">
-                                <img src="../img/news3.jpg" alt="Imagen">
+                                <img src="../img/noticias/news3.jpg" alt="Imagen">
                                 </figure>
                             </div>
                             <div class="card-content">
@@ -145,7 +145,7 @@
                         <div class="card">
                             <div class="card-image">
                             <figure class="image is-4by3">
-                                <img src="../img/news4.jpg" alt="Imagen">
+                                <img src="../img/noticias/news4.jpg" alt="Imagen">
                             </figure>
                             </div>
                             <div class="card-content">
@@ -169,6 +169,16 @@
         </section>
     </main>
 
-    <script src="../js/deseados.js"></script>
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <p>
+          <strong>Steam-ARG</strong> por <a href="https://github.com/erosmartz">Eros Martz</a>. 
+          <p>Para Javascript - Coderhouse 2023.</p>
+        </p>
+      </div>
+    </footer>
+
+
+    <script src="../js/script.js"></script>
   </body>
 </html>
