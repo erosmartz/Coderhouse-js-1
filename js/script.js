@@ -19,9 +19,11 @@ function get_juego () {
     /* valores de los nodos DOM para el objeto */
     let nombre = document.getElementById("nombre");
     let precio = document.getElementById("precio");
+    let precio_iva = parseFloat(precio.value) * 1.75;
+    
   
     /* OBJETO JUEGO */
-    let juego = { Nombre: nombre.value, Precio: precio.value };
+    let juego = { Nombre: nombre.value, Precio: precio.value, Total: precio_iva };
     return juego
 }
 /* -------------------------------------------------------------------------------------------- */
@@ -47,7 +49,7 @@ function calcular_precio() {
   /* Cambiamos el HTML interno del nodo por el correcto. Antes yo estaba creando todo el tiempo nodos nuevos. Ahora
   modifico el mismo con una logica mejorada para que no se repita y sea mas simple */
   box.innerHTML = `<p>El juego "${juego.Nombre}" de $${juego.Precio}, 
-  con todos los impuestos sale $${juego.Precio * 1.75}.</p>
+  con todos los impuestos sale $${juego.Total}.</p>
   <div class="control"><button class="button is-link" onClick='data_push()'>Agregar a Deseados</button></div>`;
 
 }
@@ -231,7 +233,7 @@ function wishlist_loop(array) {
   /* se recorre el array y se guardan todos los nodos en formato de string */
   for (let i = 0; i < array.length; i++) {
     nodos += `<div class="dropdown-item">
-    <p">Juego: ${array[i].Nombre} - Precio: ${array[i].Precio}
+    <p">Juego: ${array[i].Nombre} - Precio: ${array[i].Total}
     </p>
     <button class="button is-small is-danger is-outlined" onClick='removerItem(${i})'>
     <span>Borrar</span>
