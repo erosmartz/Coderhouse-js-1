@@ -39,6 +39,7 @@ function calcular_precio() {
 
   /* Tomamos el objeto obtenido anteriormente */
   let juego = get_juego ();
+  
 
   /* el nodo del box donde se muestra el resultado + el boton de agregar a lista deseados */
   let box = document.getElementById("box_calc");
@@ -48,9 +49,14 @@ function calcular_precio() {
 
   /* Cambiamos el HTML interno del nodo por el correcto. Antes yo estaba creando todo el tiempo nodos nuevos. Ahora
   modifico el mismo con una logica mejorada para que no se repita y sea mas simple */
-  box.innerHTML = `<p>El juego "${juego.Nombre}" de $${juego.Precio}, 
-  con todos los impuestos sale $${juego.Total}.</p>
-  <div class="control"><button class="button is-link" onClick='data_push()'>Agregar a Deseados</button></div>`;
+  if (juego.Nombre == ''){
+    box.innerHTML = `<p>Error: Porfavor ingrese un nombre válido.</p>`
+  }
+  else {
+    box.innerHTML = `<p>El juego "${juego.Nombre}" de $${juego.Precio}, 
+    con todos los impuestos sale $${juego.Total}.</p>
+    <div class="control"><button class="button is-link" onClick='data_push()'>Agregar a Deseados</button></div>`;
+  }
 
 }
 /* -------------------------------------------------------------------------------------------- */
@@ -229,19 +235,23 @@ function wishlist_update() {
 function wishlist_loop(array) {
 
   let nodos = ''; /* se setea la variable principal */
+  let total = 0; /* se setea el total */
 
   /* se recorre el array y se guardan todos los nodos en formato de string */
   for (let i = 0; i < array.length; i++) {
     nodos += `<div class="dropdown-item">
-    <p">Juego: ${array[i].Nombre} - Precio: ${array[i].Total}
-    </p>
+    <p><em>Juego:</em> <strong>${array[i].Nombre}</strong><br><em>Precio:</em> <strong>${array[i].Total}</strong></p>
     <button class="button is-small is-danger is-outlined" onClick='removerItem(${i})'>
     <span>Borrar</span>
     </button>
     </div>
     <hr class="dropdown-divider" />`;
+    total += array[i].Total;
   }
-
+  /* se le agrega un nodo al final para que tenga la suma total de todos los juegos */
+  nodos += `<div class="dropdown-item">
+  <p><em>Precio Total:</em> <strong>${total}</strong></p>
+  </div>`
   return nodos;
 }
 /* -------------------------------------------------------------------------------------------- */
