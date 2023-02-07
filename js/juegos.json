@@ -1,0 +1,66 @@
+[
+    {
+        "id": 1,
+        "nombre": "Dark Souls 1",
+        "precio": "499",
+        "genero": "Soulslike",
+        "imagen": "https://upload.wikimedia.org/wikipedia/en/8/8d/Dark_Souls_Cover_Art.jpg",
+        "rating": "4.7"
+    },
+    {
+        "id": 2,
+        "nombre": "Dark Souls 2",
+        "precio": "799",
+        "genero": "Soulslike",
+        "imagen": "https://upload.wikimedia.org/wikipedia/en/e/ed/Dark_Souls_II_cover.jpg",
+        "rating": "4.2"
+    },
+    {
+        "id": 3,
+        "nombre": "Dark Souls 3",
+        "precio": "3500",
+        "genero": "Soulslike",
+        "imagen": "https://upload.wikimedia.org/wikipedia/en/thumb/b/bb/Dark_souls_3_cover_art.jpg/220px-Dark_souls_3_cover_art.jpg",
+        "rating": "4.8"
+    },
+    {
+        "id": 4,
+        "nombre": "Elden Ring",
+        "precio": "14000",
+        "genero": "Soulslike",
+        "imagen": "https://m.media-amazon.com/images/I/6110RSDn3PL.jpg",
+        "rating": "4.9"
+    },
+    {
+        "id": 5,
+        "nombre": "Sekiro: Shadows Die Twice",
+        "precio": "4900",
+        "genero": "Soulslike",
+        "imagen": "https://i.pinimg.com/originals/ba/a0/8b/baa08bc3dc95fb3d105391e7ca24dd82.jpg",
+        "rating": "4.2"
+    },
+    {
+        "id": 6,
+        "nombre": "Witcher 3: Wild Hunt",
+        "precio": "1200",
+        "genero": "RPG",
+        "imagen": "https://upload.wikimedia.org/wikipedia/en/0/0c/Witcher_3_cover_art.jpg",
+        "rating": "4.9"
+    },
+    {
+        "id": 7,
+        "nombre": "Assassins Creed 2",
+        "precio": "250",
+        "genero": "Stealth Action",
+        "imagen": "https://upload.wikimedia.org/wikipedia/en/7/77/Assassins_Creed_2_Box_Art.JPG",
+        "rating": "4.4"
+    },
+    {
+        "id": 8,
+        "nombre": "Warhammer 40K: Darktide",
+        "precio": "6500",
+        "genero": "Co-Op FPS",
+        "imagen": "https://upload.wikimedia.org/wikipedia/en/6/6f/Darktide_art.jpg",
+        "rating": "4.0"
+    }
+]

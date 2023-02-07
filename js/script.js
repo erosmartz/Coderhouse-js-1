@@ -6,8 +6,6 @@
 /* -------------------------------------------------------------------------------------------- */
 
 
-
-
 /* =============================================      =============================================      ============================================= */
 /* =============================================                  CALCULADORA                            ============================================= */ 
 /* =============================================      =============================================      ============================================= */
@@ -287,6 +285,7 @@ function removerItem(index){
 
 
 
+
 /* =============================================      =============================================      ============================================= */
 /* =============================================                  EVENT LISTENERS                     /* ============================================= */ 
 /* =============================================      =============================================      ============================================= */
@@ -301,6 +300,74 @@ function removerItem(index){
 /* cuando no podia agregar los listeners a los botones de la pagina Index */
 /* -------------------------------------------------------------------------------------------- */
 
-    
+
+
+
+
+/* =============================================      =============================================      ============================================= */
+/* =============================================                   FETCH - APIs                          ============================================= */ 
+/* =============================================      =============================================      ============================================= */
 
     
+
+/* -------------------------------------------------------------------------------------------- */
+/* Catalogo de juegos . Fetch API*/
+/* formato de los datos del json */ /* id, nombre, precio, genero, imagen, rating  */
+
+
+/* El nodo que se va a utilizar para concatenar los subnodos */
+let catalogo = document.getElementById("catalogo");
+
+/* -------------------------------------------------------------------------------------------- */
+/* Se hace el request al API */
+fetch("../js/juegos.json")
+    .then(response => response.json())
+    /* se ejecuta la funcion api_nodos usando como parametro el array traido del API con el Fetch */
+    .then(data => {
+      if(catalogo)
+      {catalogo.innerHTML = api_nodos(data)}
+    })
+    
+
+/* -------------------------------------------------------------------------------------------- */    
+/* Esta funcion recorre el array del API y toma los diferentes datos de los objetos para generar nodos tipo "carta" en
+la seccion de catalago del sitio web. */
+function api_nodos(array){
+  let nodos = ''; /* se setea la variable principal */
+
+  /* se recorre el array y se guardan todos los nodos en formato de string */
+  for (let i = 0; i < array.length; i++) {
+    if (i == 0 || i == 4 || i == 8) {
+      nodos += `<div class="columns">`
+    }
+  
+    nodos += `<div class="column">
+    <div class="card">
+        <div class="card-image">
+            <figure class="image is-3by4">
+            <img src="${array[i].imagen}" alt="${array[i].nombre}">
+            </figure>
+        </div>
+          <div class="card-content">
+              <div class="media">
+                <div class="media-content">
+                    <p class="title is-4">${array[i].nombre}</p>
+                </div>
+              </div>
+          
+              <div class="content tags has-addons">
+                <span class="tag is-dark">$ ${array[i].precio}</span>
+                <span class="tag is-info">${array[i].genero}</span>
+                <span class="tag is-success">★ ${array[i].rating}</span>
+              </div>
+          </div>
+      </div>
+    </div>`;
+    
+    if (i == 3 || i == 7 || i == 11) {
+      nodos += `</div>`
+    }
+  }
+
+  return nodos;
+}
