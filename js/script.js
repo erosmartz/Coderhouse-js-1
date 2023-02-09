@@ -6,6 +6,156 @@
 /* -------------------------------------------------------------------------------------------- */
 
 
+
+
+
+
+
+
+/* =============================================      =============================================      ============================================= */
+/* =============================================                     DARK MODE                           ============================================= */ 
+/* =============================================      =============================================      ============================================= */
+
+
+
+/* al cargar el script(la pagina) */
+/* -------------------------------------------------------------------------------------------- */
+setTimeout(theme_update, 45);
+/* -------------------------------------------------------------------------------------------- */
+
+
+
+
+
+/* Leer key "theme" en LocalStorage, y aplicar los colores */
+function theme_update() {
+  let icon = document.getElementById("theme_button");
+  let mode = localStorage.getItem("theme");
+
+  if(mode == 'dark') {
+    theme_apply ('dark');
+    icon.innerText = '🌞';
+  }
+  else{
+    theme_apply ('light');
+    icon.innerText = '🌙';
+  }
+
+}
+/* -------------------------------------------------------------------------------------------- */
+
+
+
+
+
+
+
+/* -------------------------------------------------------------------------------------------- */
+/* Funcion: Aplicar los estilos de todos los nodos determinados en los parametros */
+function theme_set_styles(nodo, valor, estilo) {
+  
+  let nodos = document.querySelectorAll(nodo);
+
+  /* recorre todos los nodos especificados a travez de parametros */
+  for (let i = 0; i < nodos.length; i++) {
+
+    nodos[i].style[estilo] = valor;
+
+    }
+}
+/* -------------------------------------------------------------------------------------------- */
+
+
+
+
+
+
+/* -------------------------------------------------------------------------------------------- */
+/* Estos son todos los nodos a cambiar, usando colores 
+   dependientes de un array que cambia segun la condicion de una variable */
+
+function theme_apply (tema) {
+
+  /* seteamos la variable del condicional */
+  let colores ='';
+
+  if(tema == 'dark')
+  {
+    /* Colores del tema oscuro*/
+    colores = [
+    /* 0 - Negro */       'Black',
+    /* 1 - Gris Oscuro */ '#1e1e1e',
+    /* 2 - Blanco */      'White',
+    /* 3 - Naranja */     '#ea3f00',
+    /* 4 - Gris Claro */  '#3c3c3c',
+    /* 5 - Invertir */    'invert(100) hue-rotate(0deg) brightness(1) contrast(1)'
+    ]
+  }
+
+  else if(tema == 'light')
+  {
+    /* Colores del tema claro */
+    colores = [
+    /* 0 - Blanco */      'White',
+    /* 1 - Gris Claro */  '#c3cbcb',
+    /* 2 - Negro */       'Black',
+    /* 3 - Naranja */     '#ea3f00',
+    /* 4 - Gris Claro */  '#ececec',
+    /* 5 - Invertir */    'invert(0) hue-rotate(180deg) brightness(0.8) contrast(1.9)'
+    ]
+  }
+
+
+  /* Backgrounds */
+  theme_set_styles(['body','nav', 'main'], colores[1], 'backgroundColor')
+  theme_set_styles(['footer','.button','#box_calc','input','.dropdown-content','.tag:nth-child(3)'], colores[0], 'backgroundColor')
+  theme_set_styles('.card', colores[4], 'backgroundColor')
+  theme_set_styles('.tag:first-child',colores[2],'backgroundColor')
+  theme_set_styles(['.dropdown-item button','#box_calc button','.tag:nth-child(2)'],colores[3],'backgroundColor')
+  
+  /* Fonts */
+  theme_set_styles(['p','h2','span','label','input','a','button','strong','.card p.title','.tag:nth-child(2)','#noticias .content','.tag:nth-child(3)'], colores[2], 'color')
+  theme_set_styles(['h1', 'p.title:not(.is-6)'], colores[3], 'color')
+  theme_set_styles('.tag:first-child',colores[0],'color')
+  
+  /* etc */
+  theme_set_styles(['input','.dropdown-item button'], colores[3], 'borderColor')
+  theme_set_styles('nav img', colores[5],'filter')
+  
+}
+/* -------------------------------------------------------------------------------------------- */
+
+
+
+
+/* -------------------------------------------------------------------------------------------- */
+/* La funcion principal del modo oscuro. */
+function theme_switch() {
+
+  /* Se localiza el nodo del icono */
+  let icon = document.getElementById("theme_button");
+  /* Se chequea el LocalStorage en busca de la key del modo oscuro */
+  let mode = localStorage.getItem("theme");
+
+  /* Si la key se encuentra y es true */
+  if (mode == 'dark'){
+
+    /* Se cambia a modo claro, el icono y la key */
+    theme_apply ('light');
+    icon.innerText = '🌙';
+    localStorage.setItem('theme', 'light')
+  }
+  else{
+
+    /* Se cambia a modo oscuro, el icono y la key */
+    theme_apply ('dark');
+    icon.innerText = '🌞';
+    localStorage.setItem('theme', 'dark')
+  }
+}
+/* -------------------------------------------------------------------------------------------- */
+
+
 /* =============================================      =============================================      ============================================= */
 /* =============================================                  CALCULADORA                            ============================================= */ 
 /* =============================================      =============================================      ============================================= */
@@ -294,6 +444,7 @@ function removerItem(index){
 /* -------------------------------------------------------------------------------------------- */
     /*para cuando se carga la pagina */
     window.addEventListener("load", wishlist_update);
+    window.addEventListener("click", theme_update);
 
 /* nota: El resto de los event listeners estan agregados a los tags HTML directamente con OnClick
 /* de esta manera, no tiran errores como en la pagina de Noticias,  */
@@ -315,8 +466,8 @@ function removerItem(index){
 /* formato de los datos del json */ /* id, nombre, precio, genero, imagen, rating  */
 
 
-/* El nodo que se va a utilizar para concatenar los subnodos */
-let catalogo = document.getElementById("catalogo");
+
+
 
 /* -------------------------------------------------------------------------------------------- */
 /* Se hace el request al API */
@@ -324,23 +475,54 @@ fetch("../js/juegos.json")
     .then(response => response.json())
     /* se ejecuta la funcion api_nodos usando como parametro el array traido del API con el Fetch */
     .then(data => {
-      if(catalogo)
-      {catalogo.innerHTML = api_nodos(data)}
-    })
+
+        if(localStorage.getItem('api')) { 
+          api_refresh()
+        }
+      else {
+        
+          localStorage.setItem('api',JSON.stringify(data))
+          api_refresh()
+        }
+      })
+/* -------------------------------------------------------------------------------------------- */
     
+
+
+
+/* Se refresca el array */
+/* -------------------------------------------------------------------------------------------- */
+function api_refresh() {
+
+  /* Se busca el nodo que se va a utilizar para concatenar los subnodos */
+  if(document.getElementById("catalogo"))  {
+    document.getElementById("catalogo").innerHTML = api_nodos(
+      JSON.parse(
+          localStorage.getItem('api')
+          )
+        )
+      }
+}
+/* -------------------------------------------------------------------------------------------- */    
+
+
+
+
 
 /* -------------------------------------------------------------------------------------------- */    
 /* Esta funcion recorre el array del API y toma los diferentes datos de los objetos para generar nodos tipo "carta" en
 la seccion de catalago del sitio web. */
 function api_nodos(array){
   let nodos = ''; /* se setea la variable principal */
+  let x = 0;      /* se setea el counter para el div "columns" */
 
   /* se recorre el array y se guardan todos los nodos en formato de string */
   for (let i = 0; i < array.length; i++) {
-    if (i == 0 || i == 4 || i == 8) {
+    x++;
+    if (x == 1) {
       nodos += `<div class="columns">`
     }
-  
+    
     nodos += `<div class="column">
     <div class="card">
         <div class="card-image">
@@ -348,15 +530,15 @@ function api_nodos(array){
             <img src="${array[i].imagen}" alt="${array[i].nombre}">
             </figure>
         </div>
-          <div class="card-content">
+          <div class="card-content p-2 pt-3">
               <div class="media">
                 <div class="media-content">
-                    <p class="title is-4">${array[i].nombre}</p>
+                    <p class="title is-6">${array[i].nombre}</p>
                 </div>
               </div>
           
               <div class="content tags has-addons">
-                <span class="tag is-dark">$ ${array[i].precio}</span>
+                <span class="tag is-white">$ ${array[i].precio}</span>
                 <span class="tag is-info">${array[i].genero}</span>
                 <span class="tag is-success">★ ${array[i].rating}</span>
               </div>
@@ -364,10 +546,226 @@ function api_nodos(array){
       </div>
     </div>`;
     
-    if (i == 3 || i == 7 || i == 11) {
+    if (x == 3) {
       nodos += `</div>`
+      x = 0;
     }
   }
 
   return nodos;
 }
+/* -------------------------------------------------------------------------------------------- */    
+
+
+
+
+/* -------------------------------------------------------------------------------------------- */   
+/* Filtros para el API key*/
+
+
+
+
+/* orden alfabetico */
+/* -------------------------------------------------------------------------------------------- */ 
+function api_filter_name() {
+
+  /* parsear el array y guardarlo en una variable */
+  let array = JSON.parse(localStorage.getItem('api'))
+
+  let orden = sessionStorage.getItem('order');
+
+  if( orden == 1 || orden == null ) {
+    array.sort(
+      (a, b) => {
+
+        
+
+        sessionStorage.setItem('order', 0);
+    
+        const nombreA = a.nombre.toUpperCase();
+        const nombreB = b.nombre.toUpperCase();
+    
+        if (nombreA < nombreB) { return -1}
+        if (nombreA > nombreA) { return 1}
+        return 0
+      }
+    )
+
+    document.getElementById('boton_filtro').innerText = 'Filtros (A-Z)'
+  }
+  else {
+    array.sort(
+      (b, a) => {
+
+      
+        
+        sessionStorage.setItem('order', 1);
+    
+        const nombreA = a.nombre.toUpperCase();
+        const nombreB = b.nombre.toUpperCase();
+    
+        if (nombreA < nombreB) { return -1}
+        if (nombreA > nombreA) { return 1}
+        return 0
+      }
+    )
+
+    document.getElementById('boton_filtro').innerText = 'Filtros (Z-A)'
+  }
+
+  localStorage.setItem('api',JSON.stringify(array))
+  api_refresh()
+
+
+}
+/* -------------------------------------------------------------------------------------------- */ 
+
+
+
+
+
+/* orden precio */
+/* -------------------------------------------------------------------------------------------- */ 
+function api_filter_price() {
+
+  /* parsear el array y guardarlo en una variable */
+  let array = JSON.parse(localStorage.getItem('api'))
+
+  let orden = sessionStorage.getItem('order');
+
+  if( orden == 1 || orden == null ) {
+    array.sort(
+      (a, b) => {
+        
+        sessionStorage.setItem('order', 0);
+    
+        return a.precio - b.precio
+      }
+    )
+
+    document.getElementById('boton_filtro').innerText = 'Filtros (Más Barato)'
+  }
+  else {
+    array.sort(
+      (b, a) => {
+        
+        sessionStorage.setItem('order', 1);
+    
+        return a.precio - b.precio
+      }
+    )
+
+    document.getElementById('boton_filtro').innerText = 'Filtros (Más Caro)'
+  }
+
+  localStorage.setItem('api',JSON.stringify(array))
+  api_refresh()
+
+
+}
+/* -------------------------------------------------------------------------------------------- */ 
+
+
+
+
+
+
+
+/* orden rating */
+/* -------------------------------------------------------------------------------------------- */ 
+function api_filter_rating() {
+
+  /* parsear el array y guardarlo en una variable */
+  let array = JSON.parse(localStorage.getItem('api'))
+
+  let orden = sessionStorage.getItem('order');
+
+  if( orden == 1 || orden == null ) {
+    array.sort(
+      (a, b) => {
+        
+        sessionStorage.setItem('order', 0);
+    
+        return a.rating - b.rating
+      }
+    )
+
+    document.getElementById('boton_filtro').innerText = 'Filtros (Rating 0-5)'
+  }
+  else {
+    array.sort(
+      (b, a) => {
+        
+        sessionStorage.setItem('order', 1);
+    
+        return a.rating - b.rating
+      }
+    )
+
+    document.getElementById('boton_filtro').innerText = 'Filtros (Rating 5-0)'
+  }
+
+  localStorage.setItem('api',JSON.stringify(array))
+  api_refresh()
+
+
+}
+/* -------------------------------------------------------------------------------------------- */ 
+
+
+
+
+
+
+
+/* orden genero */
+/* -------------------------------------------------------------------------------------------- */ 
+function api_filter_genre() {
+
+  /* parsear el array y guardarlo en una variable */
+  let array = JSON.parse(localStorage.getItem('api'))
+
+  let orden = sessionStorage.getItem('order');
+
+  if( orden == 1 || orden == null ) {
+    array.sort(
+      (a, b) => {
+        
+        sessionStorage.setItem('order', 0);
+    
+        const nombreA = a.genero.toUpperCase();
+        const nombreB = b.genero.toUpperCase();
+    
+        if (nombreA < nombreB) { return -1}
+        if (nombreA > nombreA) { return 1}
+        return 0
+      }
+    )
+
+    document.getElementById('boton_filtro').innerText = 'Filtros (Género A-Z)'
+  }
+  else {
+    array.sort(
+      (b, a) => {
+        
+        sessionStorage.setItem('order', 1);
+    
+        const nombreA = a.genero.toUpperCase();
+        const nombreB = b.genero.toUpperCase();
+    
+        if (nombreA < nombreB) { return -1}
+        if (nombreA > nombreA) { return 1}
+        return 0
+      }
+    )
+
+    document.getElementById('boton_filtro').innerText = 'Filtros (Género Z-A)'
+  }
+
+  localStorage.setItem('api',JSON.stringify(array))
+  api_refresh()
+
+
+
+}
+/* -------------------------------------------------------------------------------------------- */ 

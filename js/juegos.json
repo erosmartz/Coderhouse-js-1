@@ -62,5 +62,37 @@
         "genero": "Co-Op FPS",
         "imagen": "https://upload.wikimedia.org/wikipedia/en/6/6f/Darktide_art.jpg",
         "rating": "4.0"
+    },
+    {
+        "id": 9,
+        "nombre": "Warhammer: Vermintide 2",
+        "precio": "480",
+        "genero": "Co-Op FPS",
+        "imagen": "https://upload.wikimedia.org/wikipedia/en/d/de/Vermintide_2_cover_art.jpg",
+        "rating": "4.5"
+    },
+    {
+        "id": 10,
+        "nombre": "Halo: Master Chief Collection",
+        "precio": "1500",
+        "genero": "FPS",
+        "imagen": "https://upload.wikimedia.org/wikipedia/en/a/a3/Halo_TMCC_KeyArt_Vert_2019.png",
+        "rating": "4.4"
+    },
+    {
+        "id": 11,
+        "nombre": "Quake",
+        "precio": "490",
+        "genero": "FPS",
+        "imagen": "https://s3.gaming-cdn.com/images/products/9401/orig-fallback-v1/quake-xbox-one-xbox-series-x-s-xbox-one-xbox-series-x-s-game-microsoft-store-cover.jpg?v=1647512399",
+        "rating": "5.0"
+    },
+    {
+        "id": 12,
+        "nombre": "Terraria",
+        "precio": "290",
+        "genero": "Exploration",
+        "imagen": "https://www.mobygames.com/images/covers/l/598244-terraria-xbox-one-front-cover.png",
+        "rating": "4.8"
     }
 ]

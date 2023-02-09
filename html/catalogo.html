@@ -39,7 +39,11 @@
         </div>
 
         <div class="navbar-end" id="navbar_end">
-          <div class="navbar-item dropdown is-hoverable">
+          <div class="navbar-item">
+            <button class="button is-dark is-outlined is-right" onClick="theme_switch()" id="theme_button">🌙</button>
+          </div>
+
+          <div class="navbar-item dropdown is-right is-hoverable">
 
 
             <div class="dropdown-trigger">
@@ -64,17 +68,50 @@
     </nav>
 
     <main class="section">
-        <section class="section container">
-          <p class="title is-1">Juegos en oferta!</p>
-          <p class="subtitle is-3">Chequealos en Steam ya mismo!</p>
-        </section>
 
         <section class="section container">
 
-            <div id="catalogo">
-                <div class="columns"></div>
+          <div class="block">
+            <p class="title is-1">Juegos en oferta!</p>
+            <p class="subtitle is-3">Chequealos en Steam ya mismo!</p>
+         </div>
 
-                <div class="columns"></div>
+
+          <div class="block dropdown is-left is-hoverable">
+            <div class="dropdown-trigger">
+              <button class="button" aria-haspopup="true" aria-controls="dropdown-menu4">
+                <span id="boton_filtro">Filtros</span>
+              </button>
+            </div>
+            <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+              <div class="dropdown-content">
+                <div class="dropdown-item button" onClick="api_filter_name()">
+                  <p>Por Orden Alfabetico</p>
+                </div>
+
+                <div class="dropdown-item button" onClick="api_filter_price()">
+                  <p>Por Precio</p>
+                </div>
+
+                <div class="dropdown-item button" onClick="api_filter_rating()">
+                  <p>Por Rating</p>
+                </div>
+
+                <div class="dropdown-item button" onClick="api_filter_genre()">
+                  <p>Por Genero</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+
+
+
+            <div class="block" id="catalogo">
 
             
         </section>
